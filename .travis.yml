@@ -10,13 +10,15 @@ python:
  - 3.4
  - 3.5
 
-sudo: false
-
 install:
  - pip install pyflakes
+ - sudo apt-get install rtmpdump python python-crypto php5-cli php5-curl php5-mcrypt
+ - sudo php5enmod mcrypt
 
 script:
  - pyflakes yle-dl
+ - sudo make install
+ - yle-dl --help
 
 after_script:
  - pip install pep8
