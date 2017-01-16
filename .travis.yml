@@ -22,12 +22,7 @@ install:
  - sudo php5enmod mcrypt
  - sudo make install
 
- - locate curl.so
- - locate mcrypt.so
-
  - pip install pycrypto
-
- - locate mcrypt.so
 
 
 script:
