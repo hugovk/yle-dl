@@ -3,6 +3,7 @@ dist: trusty
 language: python
 
 python:
+ - pypy
  - 2.7
  - 2.6
 
@@ -10,6 +11,8 @@ sudo: true
 
 install:
  - pip install pyflakes
+ # PyPy needs gmp removed for PyCrypto
+ - if [ "$TRAVIS_PYTHON_VERSION" == "pypy" ]; then sudo apt-get remove gmp; fi
  - pip install pycrypto
  - sudo apt-get install rtmpdump python python-crypto php5-cli php5-curl php5-mcrypt
  - sudo php5enmod mcrypt
