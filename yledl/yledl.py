@@ -31,6 +31,7 @@ import os.path
 import codecs
 import logging
 import argparse
+from builtins import str
 from version import version
 from utils import print_enc
 
@@ -83,7 +84,7 @@ def arg_parser():
                 print_enc(message, file, False)
 
     def unicode_arg(bytes):
-        return unicode(bytes, sys.getfilesystemencoding())
+        return str(bytes, sys.getfilesystemencoding())
 
     description = \
         (u'yle-dl %s: Download media files from Yle Areena and Elävä Arkisto\n'
