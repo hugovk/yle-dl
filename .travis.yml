@@ -23,7 +23,7 @@ env:
     - ENABLE_FINLAND_TESTS=0
 
 install:
- - pip install pyflakes pep8
+ - pip install pyflakes pycodestyle
  - python setup.py install
 
 script:
@@ -32,4 +32,4 @@ script:
  - yle-dl --help
 
 after_script:
- - pep8 --statistics --count yledl/*.py
+ - pycodestyle --statistics --count yledl/*.py
