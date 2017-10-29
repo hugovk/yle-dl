@@ -250,7 +250,7 @@ def download(url, action, io, stream_filters, backends, postprocess_command):
 
 def bitrate_from_arg(arg):
     if arg == 'best':
-        return sys.maxint
+        return sys.maxsize
     elif arg == 'worst':
         return 0
     else:
@@ -258,7 +258,7 @@ def bitrate_from_arg(arg):
             return int(arg)
         except ValueError:
             logger.warning(u'Invalid bitrate %s, defaulting to best' % arg)
-            arg = sys.maxint
+            arg = sys.maxsize
 
 
 def which(program):
@@ -367,7 +367,7 @@ def main():
     else:
         sublang = 'none' if action == StreamAction.PIPE else 'all'
 
-    maxbitrate = bitrate_from_arg(args.maxbitrate or sys.maxint)
+    maxbitrate = bitrate_from_arg(args.maxbitrate or sys.maxsize)
     stream_filters = StreamFilters(args.latestepisode, args.audiolang, sublang,
                                    args.hardsubs, maxbitrate)
     exit_status = RD_SUCCESS

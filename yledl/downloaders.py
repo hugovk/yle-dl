@@ -245,7 +245,7 @@ class StreamFilters(object):
     versions to download.
     """
     def __init__(self, latest_only=False, audiolang='', sublang='all',
-                 hardsubs=False, maxbitrate=sys.maxint):
+                 hardsubs=False, maxbitrate=sys.maxsize):
         self.latest_only = latest_only
         self.audiolang = audiolang
         self.sublang = sublang
