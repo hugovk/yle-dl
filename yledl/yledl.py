@@ -32,8 +32,6 @@ import codecs
 import logging
 import argparse
 from builtins import str
-from version import version
-from utils import print_enc
 
 try:
     # Python 3
@@ -43,8 +41,10 @@ except ImportError:
     from urllib import quote
     from urlparse import urlparse, urlunparse
 
-from downloaders import downloader_factory, StreamFilters, IOContext, \
+from .downloaders import downloader_factory, StreamFilters, IOContext, \
     DownloadLimits, BackendFactory, RD_SUCCESS, RD_FAILED
+from .utils import print_enc
+from .version import version
 
 
 def yledl_logger():

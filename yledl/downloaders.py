@@ -1,32 +1,35 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
-import sys
-import re
-import subprocess
+
+import base64
+import codecs
+import ctypes
+import ctypes.util
+import json
+import logging
 import os
 import os.path
 import platform
+import re
 import signal
-import json
-import xml.dom.minidom
+import subprocess
+import sys
 import time
-import codecs
-import base64
-import ctypes
-import ctypes.util
-import logging
-import lxml.html
-import lxml.etree
-import requests
-import hds
+import xml.dom.minidom
 from builtins import str
-from requests.adapters import HTTPAdapter
+
+import lxml.etree
+import lxml.html
+import requests
 from Crypto.Cipher import AES
 from pkg_resources import resource_filename
-from version import version
-from utils import print_enc
-from videoutils import is_complete
+from requests.adapters import HTTPAdapter
+
+from . import hds
+from .utils import print_enc
+from .version import version
+from .videoutils import is_complete
 
 try:
     # Python 3
@@ -37,6 +40,7 @@ except ImportError:
     from urlparse import urlparse
     from urllib import quote_plus
     from urllib2 import HTTPError
+
 
 # exit codes
 RD_SUCCESS = 0

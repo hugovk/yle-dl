@@ -1,7 +1,7 @@
-from yledl import download, StreamAction
-from downloaders import StreamFilters, IOContext, DownloadLimits, \
+from .downloaders import StreamFilters, IOContext, DownloadLimits, \
     BackendFactory, RD_SUCCESS, RD_FAILED, RD_INCOMPLETE
-from version import version
+from .yledl import download, StreamAction
+from .version import version
 
 __all__ = [
     'download',
