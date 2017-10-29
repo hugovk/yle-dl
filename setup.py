@@ -2,6 +2,7 @@
 
 import re
 import sys
+
 from setuptools import setup
 
 needs_pytest = set(['pytest', 'test', 'ptr']).intersection(sys.argv)
@@ -25,6 +26,11 @@ ssl_sni_requires = []
 if sys.version_info < (2, 7, 9):
     ssl_sni_requires = ['pyOpenSSL', 'ndg-httpsclient', 'pyasn1']
 
+if sys.version_info.major == 2:
+    pyamf_requires = ['pyamf']
+else:
+    pyamf_requires = ['Py3AMF']
+
 setup(
     name='yle-dl',
     version=version,
@@ -37,16 +43,16 @@ setup(
     packages=['yledl'],
     include_package_data=True,
     install_requires=[
-        'pycrypto', 'requests', 'lxml', 'pyamf'
-    ] + ssl_sni_requires,
-    extras_require = {
+        'pycrypto', 'requests', 'lxml',
+    ] + ssl_sni_requires + pyamf_requires,
+    extras_require={
         'youtubedl-backend': ['youtube_dl']
     },
-    setup_requires = maybe_pytest_runner,
-    tests_require = [
+    setup_requires=maybe_pytest_runner,
+    tests_require=[
         'pytest',
     ],
-    entry_points = {
+    entry_points={
         'console_scripts': [
             'yle-dl = yledl.yledl:main'
         ]
