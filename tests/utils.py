@@ -1,6 +1,6 @@
 import sys
 import json
-from cStringIO import StringIO
+from io import StringIO
 from yledl import download, StreamFilters, BackendFactory, IOContext, \
     DownloadLimits, StreamAction, RD_SUCCESS
 
