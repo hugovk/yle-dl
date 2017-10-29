@@ -1,8 +1,16 @@
 import sys
 import json
-from io import StringIO
+
+try:
+    # Python 2.7
+    # TODO import from io
+    from cStringIO import StringIO
+except ImportError:
+    # Python 3
+    from io import StringIO
+
 from yledl import download, StreamFilters, BackendFactory, IOContext, \
-    DownloadLimits, StreamAction, RD_SUCCESS
+    StreamAction, RD_SUCCESS
 
 
 # Context manager for capturing stdout output. See
