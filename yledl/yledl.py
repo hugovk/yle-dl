@@ -31,7 +31,6 @@ import os.path
 import codecs
 import logging
 import argparse
-from builtins import str
 
 try:
     # Python 3
@@ -45,6 +44,13 @@ from .downloaders import downloader_factory, StreamFilters, IOContext, \
     DownloadLimits, BackendFactory, RD_SUCCESS, RD_FAILED
 from .utils import print_enc
 from .version import version
+
+try:
+    # Python 2.7
+    assert(unicode)
+except NameError:
+    # Python 3
+    unicode = str
 
 
 def yledl_logger():
@@ -84,7 +90,7 @@ def arg_parser():
                 print_enc(message, file, False)
 
     def unicode_arg(bytes):
-        return str(bytes, sys.getfilesystemencoding())
+        return unicode(bytes, sys.getfilesystemencoding())
 
     description = \
         (u'yle-dl %s: Download media files from Yle Areena and Elävä Arkisto\n'

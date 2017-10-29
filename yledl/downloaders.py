@@ -17,7 +17,6 @@ import subprocess
 import sys
 import time
 import xml.dom.minidom
-from builtins import str
 
 import lxml.etree
 import lxml.html
@@ -41,6 +40,12 @@ except ImportError:
     from urllib import quote_plus
     from urllib2 import HTTPError
 
+try:
+    # Python 2.7
+    assert(unicode)
+except NameError:
+    # Python 3
+    unicode = str
 
 # exit codes
 RD_SUCCESS = 0
@@ -225,7 +230,7 @@ def select_bitrate(available_bitrates, maxbitrate):
 
 def sane_filename(name, excludechars):
     if isinstance(name, str):
-        name = str(name, 'utf-8', 'ignore')
+        name = unicode(name, 'utf-8', 'ignore')
     tr = dict((ord(c), ord(u'_')) for c in excludechars)
     x = name.strip(' .').translate(tr)
     return x or u'ylevideo'
@@ -745,7 +750,7 @@ class AreenaRTMPStreamUrl(AreenaStreamBase):
         try:
             scheme, edgefcs, rtmppath = self.rtmpurlparse(rtmp_connect)
         except ValueError as exc:
-            logger.error(str(exc.message, 'utf-8', 'ignore'))
+            logger.error(unicode(exc.message, 'utf-8', 'ignore'))
             return None
 
         ident = download_page('http://%s/fcs/ident' % edgefcs)
@@ -758,7 +763,7 @@ class AreenaRTMPStreamUrl(AreenaStreamBase):
         try:
             identxml = xml.dom.minidom.parseString(ident)
         except Exception as exc:
-            logger.error(str(exc.message, 'utf-8', 'ignore'))
+            logger.error(unicode(exc.message, 'utf-8', 'ignore'))
             return None
 
         nodelist = identxml.getElementsByTagName('ip')
@@ -1078,7 +1083,7 @@ class Areena2014Downloader(AreenaUtils, KalturaUtils):
                 'app_id=89868a18&app_key=54bb4ea4d92854a2a45e98f961f0d7da&'
                 'limit={limit}{offset_param}'.format(
                     series_id=quote_plus(series_id),
-                    limit=str(page_size),
+                    limit=unicode(page_size),
                     offset_param=offset_param))
 
     def is_playlist_page(self, html_tree):
@@ -1795,7 +1800,7 @@ class Subprocess(object):
             return RD_INCOMPLETE
         except OSError as exc:
             logger.error(u'Failed to execute ' + ' '.join(args))
-            logger.error(str(exc.strerror, 'UTF-8', 'replace'))
+            logger.error(unicode(exc.strerror, 'UTF-8', 'replace'))
             return RD_FAILED
 
     def _sigterm_when_parent_dies(self):
